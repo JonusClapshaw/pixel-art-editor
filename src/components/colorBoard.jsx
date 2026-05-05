@@ -1,5 +1,8 @@
+import { useState } from 'react'
+import '../App.css'
+
 function ColorBoard() {
-    return <h1>board</h1>
+    return <></>
 }
 
 export default ColorBoard;
