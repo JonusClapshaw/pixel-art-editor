@@ -38,47 +38,51 @@ function App() {
     <>
       <h1>Pixel Art Editor</h1>
       <div className="pixel-art">
-        <label className="pixel-tools">
-          Color
-          <input
-            type="color"
-            value={currentColor}
-            onChange={(e) => setCurrentColor(e.target.value)}
-          />
-        </label>
-        <div className="pixel-presets">
-          {PRESETS.map(c => (
-            <button
-              key={c}
-              className={'preset' + (c === currentColor ? ' selected' : '')}
-              style={{background: c}}
-              onClick={() => setCurrentColor(c)}
-              aria-label={`Color ${c}`}
+        <div className="controls-column">
+          <label className="pixel-tools">
+            Color
+            <input
+              type="color"
+              value={currentColor}
+              onChange={(e) => setCurrentColor(e.target.value)}
             />
-          ))}
-        </div>
-        <button className="clear-btn" onClick={clearGrid}>Clear</button>
-
-        <div
-          className="pixel-grid"
-          style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)` }}
-        >
-          {grid.map((row, r) =>
-            row.map((color, c) => (
+          </label>
+          <div className="pixel-presets">
+            {PRESETS.map(c => (
               <button
-                key={`${r}-${c}`}
-                className="pixel"
-                style={{ background: color }}
-                onMouseDown={() => paint(r, c)}
-                onMouseEnter={(e) => {
-                  if (e.buttons === 1) {
-                    paint(r, c)
-                  }
-                }}
-                aria-label={`Pixel ${r}, ${c}`}
+                key={c}
+                className={'preset' + (c === currentColor ? ' selected' : '')}
+                style={{background: c}}
+                onClick={() => setCurrentColor(c)}
+                aria-label={`Color ${c}`}
               />
-            )),
-          )}
+            ))}
+          </div>
+          <button className="clear-btn" onClick={clearGrid}>Clear</button>
+        </div>
+
+        <div className="board-column">
+          <div
+            className="pixel-grid"
+            style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)` }}
+          >
+            {grid.map((row, r) =>
+              row.map((color, c) => (
+                <button
+                  key={`${r}-${c}`}
+                  className="pixel"
+                  style={{ background: color }}
+                  onMouseDown={() => paint(r, c)}
+                  onMouseEnter={(e) => {
+                    if (e.buttons === 1) {
+                      paint(r, c)
+                    }
+                  }}
+                  aria-label={`Pixel ${r}, ${c}`}
+                />
+              )),
+            )}
+          </div>
         </div>
       </div>
     </>
