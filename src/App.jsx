@@ -30,7 +30,7 @@ function App() {
 
   const paint = (row, col) => {
     const next = grid.map((r) => r.slice());
-    next[row][col] = currentColor;
+    next[row][col] = DEFAULT_COLOR;
     setGrid(next);
   };
 
@@ -69,16 +69,16 @@ function App() {
             {grid.map((row, r) =>
               row.map((color, c) => (
                 <button
-                  key={`${r}-${c}`}
+                  key={`${c}-${r}`}
                   className="pixel"
                   style={{ background: color }}
-                  onMouseDown={() => paint(r, c)}
-                  onMouseEnter={(e) => {
+                  onMouseEnter={() => paint(c, r)}
+                  onMouseDown={(e) => {
                     if (e.buttons === 1) {
                       paint(r, c)
                     }
                   }}
-                  aria-label={`Pixel ${r}, ${c}`}
+                  aria-label={`Pixel ${c}, ${r}`}
                 />
               )),
             )}
